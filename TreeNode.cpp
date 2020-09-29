@@ -32,7 +32,7 @@ int TreeNode::getData() {
     return TreeNode::data;
 } // end getData
 
-void TreeNode::setLeft(TreeNode* left) {
+void TreeNode::setLeft(TreeNode * left) {
     TreeNode::leftChild = left;
 } // end setLeft
 
@@ -40,7 +40,7 @@ TreeNode * TreeNode::getLeft() {
     return TreeNode::leftChild;
 } // end getLeft
 
-void TreeNode::setRight(TreeNode* right) {
+void TreeNode::setRight(TreeNode * right) {
     TreeNode::rightChild = right;
 } // end setRight
 
@@ -48,7 +48,7 @@ TreeNode * TreeNode::getRight() {
     return TreeNode::rightChild;
 } // end getRight
 
-void TreeNode::setParent(TreeNode* parent) {
+void TreeNode::setParent(TreeNode * parent) {
     TreeNode::parent = parent;
 } // end setParent
 
