@@ -9,7 +9,7 @@
 #define TREENODE_H
 
 class TreeNode {
-    private:
+    protected:
         TreeNode * leftChild;
         TreeNode * rightChild;
         TreeNode * parent;
@@ -17,6 +17,7 @@ class TreeNode {
     public:
         TreeNode(); // constructor
         TreeNode(int data); // parameterized constructor
+        ~TreeNode(); // destructor, because memory will be allocated on the heap
         void setData(int data);
         int getData();
         void setLeft(TreeNode * left);

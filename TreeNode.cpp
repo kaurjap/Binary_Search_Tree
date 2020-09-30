@@ -21,6 +21,10 @@ TreeNode::TreeNode(int data) {
     TreeNode::rightChild = NULL;
 } // end parameterized constructor
 
+TreeNode::~TreeNode() {
+    // nothing to delete in the class
+} // end destructor
+
 
 // Getters and Setters
 
