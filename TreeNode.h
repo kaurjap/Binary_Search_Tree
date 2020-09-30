@@ -1,10 +1,3 @@
-/* 
- * File:   TreeNode.h
- * Author: Japneet Kaur
- *
- * Created on September 28, 2020, 1:00 PM
- */
-
 #ifndef TREENODE_H
 #define TREENODE_H
 
@@ -29,4 +22,3 @@ class TreeNode {
 }; // end class declaration
 
 #endif // TREENODE_H included
-
