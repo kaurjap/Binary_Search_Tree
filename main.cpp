@@ -14,11 +14,12 @@
 
 // function prototypes
 TreeNode* buildTreeRecursive(int array[], int lower, int upper); // function that uses the median logic to recursively build the tree
-int kthMin(TreeNode * root, int k); // the function to find the k (th) minimum element 
-int inOrderPrint(TreeNode* nodePointer, int k, int counter); // function to print the tree in order once it is created and return the k (th) smallest element
+//TreeNode* kthMin(TreeNode* currentRoot, int &counter, int k, TreeNode* kthElement); // the function to find the k (th) minimum element 
+void inOrderPrint(TreeNode* nodePointer); // function to print the tree in order once it is created
 void preOrderPrint(TreeNode* nodePointer); 
 void postOrderPrint(TreeNode* nodePointer); 
 int getInput(); // function to allow separation of code to get user input for k
+void kthMin(TreeNode* currentRoot, int &counter, int k, int &kthElement); // the function to find the k (th) minimum element 
 
 
 int main() {
@@ -44,10 +45,12 @@ int main() {
     postOrderPrint(root);
     std::cout << std::endl << std::endl; // empty line
     std::cout << "In Order Traversal: " << std::endl;
-    int kthElement;
-    kthElement = inOrderPrint(root, k, 0);
+    inOrderPrint(root);
     std::cout << std::endl << std::endl; // empty line
-    std::cout << "The " << k << "th smallest element from the tree is: " << kthElement << std::endl;
+    int kthSmallest = 0;
+    int counter = 0;
+    kthMin(root, counter, k, kthSmallest); // kthSmallest passed by reference
+    std::cout << "The k (th) smallest element from the tree is: " << kthSmallest << std::endl;
     return 0;
 } // end main
 
@@ -77,6 +80,20 @@ TreeNode* buildTreeRecursive(int array[], int lower, int upper) {
 } // end function buildTree
 
 
+void kthMin(TreeNode* currentRoot, int &counter, int k, int &kthElement) {
+    // use the in order traversal to find the kth minimum element and return it
+    if (currentRoot == NULL) {
+        // base case 
+    } // end if 
+    else {
+        kthMin(currentRoot->getLeft(), counter, k, kthElement);
+        counter++;
+        if (counter == k) {
+             kthElement = currentRoot->getData();
+        } // end if
+        kthMin(currentRoot->getRight(), counter, k, kthElement);
+    } // end else 
+} // end kthMin
 
 /* Function name: inOrderPrint()
  * Purpose: Once the BST is created from the array, this method is used to print the array following the in order traversal
@@ -84,23 +101,16 @@ TreeNode* buildTreeRecursive(int array[], int lower, int upper) {
  * Parameters: a pointer to the root node to begin with, then every time it is the node that is being traversed through in the current function call
  * Return value: none, just prints the tree values
  */
-int inOrderPrint(TreeNode* nodePointer, int k, int counter) {
+void inOrderPrint(TreeNode* nodePointer) {
     if (nodePointer != NULL) {
         // create a new node that stores the value of the head node from the passed in pointer
         TreeNode currentNode = *nodePointer;
         // go to the left first, then root (meaning currentNode), then right
-        inOrderPrint(currentNode.getLeft(), k, counter); // getLeft returns a pointer
+        inOrderPrint(currentNode.getLeft()); // getLeft returns a pointer
         std::cout << currentNode.getData() << " ";
-        counter++;
-        if (counter == k) {
-            int kthElement = currentNode.getData();
-            return kthElement;
-        } // end if
-        
-        inOrderPrint(currentNode.getRight(), k, counter);
+        inOrderPrint(currentNode.getRight());
     } // end if
 } // end inOrderPrint
-
 
 
 /* Function name: preOrderPrint()
