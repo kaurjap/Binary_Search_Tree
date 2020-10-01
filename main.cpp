@@ -20,7 +20,7 @@ void preOrderPrint(TreeNode* nodePointer);
 void postOrderPrint(TreeNode* nodePointer); 
 int getInput(); // function to allow separation of code to get user input for k
 void kthMin(TreeNode* currentRoot, int &counter, int k, int &kthElement); // the function to find the k (th) minimum element 
-
+void deleteTree(TreeNode* currentNode);
 
 int main() {
     int array[] = {6, 17, 20, 41, 45, 52, 57, 65, 71, 76, 79, 87, 92, 95, 99};
@@ -50,7 +50,11 @@ int main() {
     int kthSmallest = 0;
     int counter = 0;
     kthMin(root, counter, k, kthSmallest); // kthSmallest passed by reference
-    std::cout << "The k (th) smallest element from the tree is: " << kthSmallest << std::endl;
+    std::cout << "The " << k << "(th) smallest element from the tree is: " << kthSmallest << std::endl;
+    
+    // since the BST made in this program is stored on the heap, it has to be deleted in the end to prevent memory leaks and to free those memory locations
+    deleteTree(root);
+    
     return 0;
 } // end main
 
@@ -94,6 +98,7 @@ void kthMin(TreeNode* currentRoot, int &counter, int k, int &kthElement) {
         kthMin(currentRoot->getRight(), counter, k, kthElement);
     } // end else 
 } // end kthMin
+
 
 /* Function name: inOrderPrint()
  * Purpose: Once the BST is created from the array, this method is used to print the array following the in order traversal
@@ -148,6 +153,21 @@ void postOrderPrint(TreeNode* nodePointer) {
         std::cout << currentNode.getData() << " ";
     } // end if
 } // end postOrderPrint
+
+
+/* Function name: deleteTree()
+ * Purpose: to delete the BST to free the memory allocated on the heap
+ *          Uses post-order traversal to delete the tree
+ * Parameters: pointer to the root of the tree to be able to access the tree
+ * Return value: none
+ */
+void deleteTree(TreeNode* currentNode) {
+    if (currentNode != NULL) {
+        deleteTree(currentNode->getLeft());
+        deleteTree(currentNode->getRight());
+        delete currentNode;
+    } // end if
+} // end deleteTree
 
 
 /* Function name: getInput()
