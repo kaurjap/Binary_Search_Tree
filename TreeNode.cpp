@@ -23,6 +23,9 @@ TreeNode::TreeNode(int data) {
 
 TreeNode::~TreeNode() {
     // nothing to delete in the class
+    delete TreeNode::parent;
+    delete TreeNode::leftChild;
+    delete TreeNode::rightChild;
 } // end destructor
 
 
